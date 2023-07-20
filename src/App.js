@@ -66,6 +66,24 @@ class ListItem extends React.Component {
   }
 }
 
+class AddForm extends React.Component {
+  inputRef = React.createRef();
+
+  onSubmitHandler = (e) => {
+    e.preventDefault();
+    this.props.addHandler(this.inputRef.current.value);
+  };
+
+  render() {
+    return (
+      <form onSubmit={this.onSubmitHandler}>
+        <input ref={this.inputRef} type="text" placeholder="Enter New Task" />
+        <button type="submit">Add Task</button>
+      </form>
+    );
+  }
+}
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -77,10 +95,19 @@ class App extends React.Component {
     };
   }
 
+  addTodoHandler = (value) => {
+    const id = this.state.todos.length + 1;
+
+    this.setState({
+      todos: [...this.state.todos, { title: value, id }],
+    });
+  };
+
   render() {
     return (
       <div>
         <Header title="Todo List" />
+        <AddForm addHandler={this.addTodoHandler} />
         <ListItem todos={this.state.todos} />
       </div>
     );

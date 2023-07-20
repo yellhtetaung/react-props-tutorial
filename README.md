@@ -217,10 +217,10 @@ class ListItem extends React.Component {
 class AddForm extends React.Component {
   render() {
     return (
-      <form>
+      <div>
         <input type="text" placeholder="Enter New Task" />
-        <button onClick={this.props.addTodoHandler}>Add Task</button>
-      </form>
+        <button onClick={this.props.addHandler}>Add Task</button>
+      </div>
     );
   }
 }
@@ -240,7 +240,7 @@ class App extends React.Component {
     const id = this.state.todos.length + 1;
 
     this.setState({
-      todos: [...this.state.todos, { title: "Have to go", id }],
+      todos: [...this.state.todos, { id, title: "Have to go" }],
     });
   };
 
@@ -277,12 +277,12 @@ const ListItem = ({ todos }) => {
   );
 };
 
-const AddForm = ({ addTodoHandler }) => {
+const AddForm = ({ addHandler }) => {
   return (
-    <form>
+    <div>
       <input type="text" placeholder="Enter New Task" />
-      <button onClick={addTodoHandler}>Add Task</button>
-    </form>
+      <button onClick={addHandler}>Add Task</button>
+    </div>
   );
 };
 
@@ -309,7 +309,7 @@ const App = () => {
 export default App;
 ```
 
-ဒီအဆင့်မှာဆိုရင်တော့ AddForm component တစ်ခု ထပ်တိုးလာပါတယ်။ AddForm component ကို `addTodoHandler` ဆိုတဲ့ State ရဲ့ Data ကို change တဲ့ function တစ်ခုကို props အနေဖြင့် pass လုပ်ထားပါတယ်။ ဒီအဆင့်မှာဆိုရင်တော့ todos ထဲကို ထပ်ဝင်လာမယ့် data သည် default ရေးထားတာဖြစ်တဲ့အတွက်ကြောင့် `have to code` ဆိုတဲ့ string ပဲ ဝင်နေအုံးမှာဖြစ်ပါတယ်။ နောက်လာမယ့် အဆင့်တွေမှာတော့ data တွေကို dynamic ဖြစ်အောင်ရေးမှာပဲ ဖြစ်ပါတယ်။ အခု code တွေရဲ့ structure ကို ကြည့်မယ်ဆိုရင် **App component** မှာ **children** သုံးခုရှိပါမယ်။ ၎င်း children တွေကတော့ 
+ဒီအဆင့်မှာဆိုရင်တော့ AddForm component တစ်ခု ထပ်တိုးလာပါတယ်။ AddForm component ကို `addTodoHandler` ဆိုတဲ့ State ရဲ့ Data ကို change တဲ့ function တစ်ခုကို props အနေဖြင့် pass လုပ်ထားပါတယ်။ ဒီအဆင့်မှာဆိုရင်တော့ todos ထဲကို ထပ်ဝင်လာမယ့် data သည် default ရေးထားတာဖြစ်တဲ့အတွက်ကြောင့် `have to code` ဆိုတဲ့ string ပဲ ဝင်နေအုံးမှာဖြစ်ပါတယ်။ နောက်လာမယ့် အဆင့်တွေမှာတော့ data တွေကို dynamic ဖြစ်အောင်ရေးမှာပဲ ဖြစ်ပါတယ်။ အခု code တွေရဲ့ structure ကို ကြည့်မယ်ဆိုရင် **App component** မှာ **children** သုံးခုရှိပါမယ်။ ၎င်း children တွေကတော့
 
 1. Header Component
 2. AddForm Component
@@ -322,3 +322,99 @@ export default App;
 - ListItem Component မှာဆိုရင် props အနေနဲ့ `todos` ဖြစ်တဲ့ Array ကို လက်ခံထားတာပဲ ဖြစ်ပါတယ်။
 
 အခုဆိုရင် `todos` array ထဲမှာရှိတဲ့ `title` ကို input က ထည့်လိုက်တဲ့ value တွေကို ထည့်တဲ့ နည်းကို ပြောပြတော့မှာပဲ ဖြစ်ပါတယ်။ အထက်ကပြောပြသွားတဲ့ Component တိုင်းကို ပို့ထားတဲ့ props တွေကို သေသေချာချာလေး ကြည့်ပြီးတော့ မှတ်ပေးထားပါ။
+
+## Passing addHandler Function with a parameter
+
+### Class Component
+
+```javascript
+class AddForm extends React.Component {
+  inputRef = React.createRef();
+
+  onSubmitHandler = (e) => {
+    e.preventDefault();
+    this.props.addHandler(this.inputRef.current.value);
+  };
+
+  render() {
+    return (
+      <form onSubmit={this.onSubmitHandler}>
+        <input ref={this.inputRef} type="text" placeholder="Enter New Task" />
+        <button type="submit">Add Task</button>
+      </form>
+    );
+  }
+}
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      todos: [
+        { id: 1, title: "have to go" },
+        { id: 2, title: "have to eat" },
+      ],
+    };
+  }
+
+  addTodoHandler = (value) => {
+    const id = this.state.todos.length + 1;
+
+    this.setState({
+      todos: [...this.state.todos, { id, title: value }],
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <Header title="Todo List" />
+        <AddForm addHandler={this.addTodoHandler} />
+        <ListItem todos={this.state.todos} />
+      </div>
+    );
+  }
+}
+```
+
+### Functional Component
+
+```javascript
+const AddForm = ({ addHandler }) => {
+  const inputRef = React.createRef();
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    addHandler(inputRef.current.value);
+  };
+
+  return (
+    <form onSubmit={onSubmitHandler}>
+      <input ref={inputRef} type="text" placeholder="Enter New Task" />
+      <button type="submit">Add Task</button>
+    </form>
+  );
+};
+
+const App = () => {
+  const [todos, setTodos] = useState([
+    { id: 1, title: "have to go" },
+    { id: 2, title: "have to eat" },
+  ]);
+
+  const addTodoHandler = (value) => {
+    const id = todos.length + 1;
+    setTodos((prevState) => [...prevState, { id, title: value }]);
+  };
+
+  return (
+    <div>
+      <Header title="Todo List" />
+      <AddForm addHandler={addTodoHandler} />
+      <ListItem todos={todos} />
+    </div>
+  );
+};
+```
+
+ဒီအဆင့်မှာဆိုရင်တော့ AddForm component မှာ ပြောင်းလဲသွားတာတွေကတော့ form လို့ပြောင်းလိုက်ပါတယ်။ ဘာကြောင့်လဲဆိုတော့ submit လုပ်တာနဲ့ state ထဲက data ကို ပြောင်းချင်တဲ့ အတွက်ကြောင့်ပဲ ဖြစ်ပါတယ်။ App Component မှာ `addTodoHandler` function မှာ parameter အနေနဲ့ value ကို လက်ခံထားခဲ့ပြီးတော့ `addHandler` props အနေနဲ့ AddForm component ကို ပေးပို့လိုက်တာပဲ ဖြစ်ပါတယ်။ AddForm component ကနေမှာတဆင့် `AddTodoHandler` function မှာ လက်ခံထားခဲ့ value ဆိုတဲ့ parameter နေရာကို `inputRef.current.value` ဖြစ်တဲ့ input ထဲမှာထည့်လိုက်တဲ့ စာတွေကို parameter အနေနဲ့ Parent Component ကို ပြန်ပို့ပေးလိုက်တာဖြစ်ပါတယ်။ ဒီနေရာမှာ တစ်ခုသတိထားစေချင်တာက App Component ကို props အနေနဲ့ ပြန်ပို့လိုက်တာ မဟုတ်ပါဘူး။ Function ရဲ့ parameter တစ်ခုအနေနဲ့သာ ပေးပို့လိုက်တာဖြစ်ပါတယ်။
