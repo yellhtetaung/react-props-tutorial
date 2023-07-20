@@ -21,8 +21,10 @@ class TextInput extends React.Component {
 
 class Button extends React.Component {
   render() {
+    const { className, onClick } = this.props;
+
     return (
-      <button className={this.props.className} onClick={this.props.onClick}>
+      <button className={className} onClick={onClick}>
         {this.props.title}
       </button>
     );
