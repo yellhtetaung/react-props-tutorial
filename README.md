@@ -445,6 +445,6 @@ const App = () => {
     │    └── setupTests.js
     ├── .gitignore
     ├── package.json
-    ├── tailwind.confgi.js
+    ├── tailwind.config.js
     ├── README.md
     └── yarn.lock
