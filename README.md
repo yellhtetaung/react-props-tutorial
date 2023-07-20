@@ -50,7 +50,7 @@ const App = () => {
 export default App;
 ```
 
-အပေါ်က code တွေကို ကြည့်မယ်ဆိုရင် Header Component သည် App Component ရဲ့ Children ဖြစ်ပါတယ်။ အဲ့ဒါကြောင့် App Component ကနေပြီးတော့ Header Component ကို title ဆိုတဲ့ props တစ်ခုကို ပို့လိုက်ပါတယ်။ Header Component ကနေပြန်ခေါ်သုံးတဲ့ အခါမှာလည်း props ဆိုတဲ့ keyword လေးကို ခံပြီးတော့ သုံးရပါတယ်။ အကယ်၍ props ဆိုတဲ့ keyword မခံချင်ပဲ object ကို Destructuring လုပ်ချင်ရင်လည်း ယခုလိုလုပ်ပြီးတော့လည်း သုံးလို့ရပါတယ်။
+အပေါ်က code တွေကို ကြည့်မယ်ဆိုရင် Header Component သည် App Component ရဲ့ Children ဖြစ်ပါတယ်။ အဲ့ဒါကြောင့် App Component ကနေပြီးတော့ Header Component ကို title ဆိုတဲ့ props တစ်ခုကို ပို့လိုက်ပါတယ်။ Header Component ကနေပြန်ခေါ်သုံးတဲ့ အခါမှာလည်း props ဆိုတဲ့ keyword လေးကို ခံပြီးတော့ `props.title` ဆိုပြီးတော့ ပြန်ခေါ်သုံးရပါတယ်။ အကယ်၍ props ဆိုတဲ့ keyword မခံချင်ပဲ object ကို Destructuring လုပ်ချင်ရင်လည်း ယခုလိုလုပ်ပြီးတော့လည်း သုံးလို့ရပါတယ်။
 
 ## Destructuring (Props)
 
