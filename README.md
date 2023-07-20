@@ -2,6 +2,8 @@
 
 Props ကို component တစ်ခုနဲ့ တစ်ခုကို data passing လုပ်ချင်တဲ့ အခါတွေမှာ အသုံးပြုပါတယ်။ Props ကို အသုံးပြုတဲ့ အခါမှာလည်း **Parent Component** ကနေ **Children Component** ကိုပဲ ပို့လို့ရပါတယ်။ Props သည် **immutable** ဖြစ်တာကြောင့် data ကို ပြောင်းလို့ ရမှာ မဟုတ်ပါဘူး။ အဲ့ဒါကြောင့်လည်း State ထဲက Data ကိုပြောင်းလဲ ချင်တဲ့အခါမှာလည်း Parent Component မှာ `setState` function တွေရေးပြီးတဲ့အခါမှ function တွေအနေနဲ့ Props ကို ပို့ကြပါတယ်။ Children Component ကနေ Parent component ကို Props ပို့လို့မရဘူးဆိုပေးမယ် Function ရဲ့ parameter အနေနဲ့ parent component မှာ လက်ခံပြီးတော့ children component ကနေ parameter အနေနဲ့ ပို့လို့ရပါတယ်။ ထိုကဲ့သို့ ပို့တာသည် props မဟုတ်ပဲ function ရဲ့ parameter တစ်ခုပဲ ဖြစ်ပါတယ်။
 
+![props-diagram](assets/props-diagram.png)
+
 ကဲဒါဆို Code လေးတွေနဲ့ တွဲပြီးတော့ လေ့လာကြည့်ရအောင်။
 
 ### Class Component
