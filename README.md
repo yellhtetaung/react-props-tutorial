@@ -426,6 +426,7 @@ const App = () => {
 ## Splitting Component
 
 ### Project file structure
+
     .
     ├── assets
     ├── public
@@ -433,7 +434,7 @@ const App = () => {
     │    ├── AddForm.js
     │    ├── App.css
     │    ├── App.test.js
-    │    ├──BaseLayout.js
+    │    ├── BaseLayout.js
     │    ├── Components.js
     │    ├── Header.js
     │    ├── index.css
