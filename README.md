@@ -174,8 +174,8 @@ const App = () => {
 export default App;
 ```
 
-အပေါ်က code တွေကို ကြည့်မယ်ဆိုရင် ListItem component သည် App component ရဲ့ children ဖြစ်ပါတယ်။ အဲ့ဒါကြောင့်လည်း App Component ရဲ့ State ထဲမှာရှိတဲ့ todos ဆိုတဲ့ Array တစ်ခုကို ListItem component ကို props အနေနဲ့ data passing လုပ်ပေးလိုက်တာဖြစ်ပါတယ်။ ListItem component မှာလည်း Props destructuring လုပ်ပြီးတော့ ပြန်ခေါ်သုံးထားပါတယ်။ ယခုလိုသုံးတာတွေက Destructuring လုပ်တဲ့ သဘောတရားကို အကျွမ်းတဝင်ရှိအောင်လို့ပဲ ဖြစ်ပါတယ်။ ListItem မှာ todos ကို Looping လုပ်တဲ့ အခါမှာလည်း array method တွေဖြစ်တဲ့ (map, forEach) တို့ကို အသုံးများပါတယ်။ မဖြစ်မနေသိထားရမှာက Looping လုပ်ပြီးတိုင်းမှာ **top(root) level element** မှာ key ဆိုတဲ့ props ကို မဖြစ်မနေ ထည့်ပေးဖို့လိုအပ်ပါတယ်။ Key ပေးတဲ့အခါမှာလည်း unique value ဖြစ်ဖို့လည်း အရေးကြီးပါတယ်။ ဒီလောက်ဆိုရင်တော့ looping လုပ်တဲ့ သဘောတရားကို နားလည်မယ်လို့ထင်ပါတယ်။ 
- 
+အပေါ်က code တွေကို ကြည့်မယ်ဆိုရင် ListItem component သည် App component ရဲ့ children ဖြစ်ပါတယ်။ အဲ့ဒါကြောင့်လည်း App Component ရဲ့ State ထဲမှာရှိတဲ့ todos ဆိုတဲ့ Array တစ်ခုကို ListItem component ကို props အနေနဲ့ data passing လုပ်ပေးလိုက်တာဖြစ်ပါတယ်။ ListItem component မှာလည်း Props destructuring လုပ်ပြီးတော့ ပြန်ခေါ်သုံးထားပါတယ်။ ယခုလိုသုံးတာတွေက Destructuring လုပ်တဲ့ သဘောတရားကို အကျွမ်းတဝင်ရှိအောင်လို့ပဲ ဖြစ်ပါတယ်။ ListItem မှာ todos ကို Looping လုပ်တဲ့ အခါမှာလည်း array method တွေဖြစ်တဲ့ (map, forEach) တို့ကို အသုံးများပါတယ်။ မဖြစ်မနေသိထားရမှာက Looping လုပ်ပြီးတိုင်းမှာ **top(root) level element** မှာ key ဆိုတဲ့ props ကို မဖြစ်မနေ ထည့်ပေးဖို့လိုအပ်ပါတယ်။ Key ပေးတဲ့အခါမှာလည်း unique value ဖြစ်ဖို့လည်း အရေးကြီးပါတယ်။ ဒီလောက်ဆိုရင်တော့ looping လုပ်တဲ့ သဘောတရားကို နားလည်မယ်လို့ထင်ပါတယ်။
+
 ## Why each element in a list should have a unique key?
 
 react မှာ key အကြောင်းပြောရရင် render လုပ်တဲ့ ပုံစံကိုပါ သိထားဖို့လိုအပ်ပါတယ်။ React သည် Virtual-DOM နဲ့ အလုပ်လုပ်ပါတယ်။
@@ -185,3 +185,140 @@ react မှာ key အကြောင်းပြောရရင် render လ�
 Virtual-DOM က Browser ပေါ်မှာ ဖော်ပြထားတဲ့ DOM-Tree နဲ့ပုံစံတူ Object တစ်ခုကို တည်ဆောက်ထားတယ်။ ကျတော်တို့ element (or) component တွေကို ပြောင်းလဲလိုက်တဲ့အခါမှာ DOM-Tree နဲ့ပုံစံ Object တစ်ခုကို ထပ်ထုတ်တယ်။ အဲ့အခါမှ နဂိုရှိပြီးသား object နဲ့ ထပ်ထုတ်ထားတဲ့ object နှစ်ခုကို တိုက်စစ်ပြီးတော့ ပြောင်းသွားတဲ့ နေရာလေးတွေကိုပဲ ထပ်ဖြည့်ပြီးတော့ browser ပေါ်မှာ ပြင်ပြီးတော့ လာဖော်ပြတာပဲ ဖြစ်ပါတယ်။ အဲ့ဒါကြောင့် array element တွေကို re-render လုပ်တဲ့အခါမှာ unique ဖြစ်တဲ့ value တွေကို key အဖြစ်နဲ့ ထည့်ပေးရတာဖြစ်ပါတယ်။
 
 ![Virtual-DOM](assets/virtual-dom.jpg)
+
+---
+
+## Passing Function with props
+
+### Class Component
+
+```javascript
+import React from "react";
+
+class Header extends React.Component {
+  render() {
+    return <h1>{this.props.title}</h1>;
+  }
+}
+
+class ListItem extends React.Component {
+  render() {
+    const { todos } = this.props;
+    return (
+      <div>
+        {todos.map((todo) => {
+          return <h1 key={todo.id}>{todo.title}</h1>;
+        })}
+      </div>
+    );
+  }
+}
+
+class AddForm extends React.Component {
+  render() {
+    return (
+      <form>
+        <input type="text" placeholder="Enter New Task" />
+        <button onClick={this.props.addTodoHandler}>Add Task</button>
+      </form>
+    );
+  }
+}
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      todos: [
+        { id: 1, title: "have to go" },
+        { id: 2, title: "have to eat" },
+      ],
+    };
+  }
+
+  addTodoHandler = () => {
+    const id = this.state.todos.length + 1;
+
+    this.setState({
+      todos: [...this.state.todos, { title: "Have to go", id }],
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <Header title="Todo List" />
+        <AddForm addHandler={this.addTodoHandler} />
+        <ListItem todos={this.state.todos} />
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+### Functional Component
+
+```javascript
+import React, { useState } from "react";
+
+const Header = (props) => {
+  return <h1>{props.title}</h1>;
+};
+
+const ListItem = ({ todos }) => {
+  return (
+    <div>
+      {todos.map((todo) => {
+        return <h1 key={todo.id}>{todo.title}</h1>;
+      })}
+    </div>
+  );
+};
+
+const AddForm = ({ addTodoHandler }) => {
+  return (
+    <form>
+      <input type="text" placeholder="Enter New Task" />
+      <button onClick={addTodoHandler}>Add Task</button>
+    </form>
+  );
+};
+
+const App = () => {
+  const [todos, setTodos] = useState([
+    { id: 1, title: "have to go" },
+    { id: 2, title: "have to eat" },
+  ]);
+
+  const addTodoHandler = () => {
+    const id = todos.length + 1;
+    setTodos((prevState) => [...prevState, { id, title: "have to code" }]);
+  };
+
+  return (
+    <div>
+      <Header title="Todo List" />
+      <AddForm addHandler={addTodoHandler} />
+      <ListItem todos={todos} />
+    </div>
+  );
+};
+
+export default App;
+```
+
+ဒီအဆင့်မှာဆိုရင်တော့ AddForm component တစ်ခု ထပ်တိုးလာပါတယ်။ AddForm component ကို `addTodoHandler` ဆိုတဲ့ State ရဲ့ Data ကို change တဲ့ function တစ်ခုကို props အနေဖြင့် pass လုပ်ထားပါတယ်။ ဒီအဆင့်မှာဆိုရင်တော့ todos ထဲကို ထပ်ဝင်လာမယ့် data သည် default ရေးထားတာဖြစ်တဲ့အတွက်ကြောင့် `have to code` ဆိုတဲ့ string ပဲ ဝင်နေအုံးမှာဖြစ်ပါတယ်။ နောက်လာမယ့် အဆင့်တွေမှာတော့ data တွေကို dynamic ဖြစ်အောင်ရေးမှာပဲ ဖြစ်ပါတယ်။ အခု code တွေရဲ့ structure ကို ကြည့်မယ်ဆိုရင် **App component** မှာ **children** သုံးခုရှိပါမယ်။ ၎င်း children တွေကတော့ 
+
+1. Header Component
+2. AddForm Component
+3. ListItem Component
+
+တွေပဲ ဖြစ်ပါတယ်။
+
+- Header Component မှာဆိုရင် props အနေနဲ့ `title` ဖြစ်တဲ့ string ကို လက်ခံထားပါတယ်။
+- AddForm Component မှာဆိုရင် props အနေနဲ့ `addHandler` ဖြစ်တဲ့ function ကို လက်ခံထားပါတယ်။
+- ListItem Component မှာဆိုရင် props အနေနဲ့ `todos` ဖြစ်တဲ့ Array ကို လက်ခံထားတာပဲ ဖြစ်ပါတယ်။
+
+အခုဆိုရင် `todos` array ထဲမှာရှိတဲ့ `title` ကို input က ထည့်လိုက်တဲ့ value တွေကို ထည့်တဲ့ နည်းကို ပြောပြတော့မှာပဲ ဖြစ်ပါတယ်။ အထက်ကပြောပြသွားတဲ့ Component တိုင်းကို ပို့ထားတဲ့ props တွေကို သေသေချာချာလေး ကြည့်ပြီးတော့ မှတ်ပေးထားပါ။
