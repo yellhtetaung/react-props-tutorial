@@ -421,4 +421,29 @@ const App = () => {
 };
 ```
 
-ဒီအဆင့်မှာဆိုရင်တော့ AddForm component မှာ ပြောင်းလဲသွားတာတွေကတော့ form လို့ပြောင်းလိုက်ပါတယ်။ ဘာကြောင့်လဲဆိုတော့ submit လုပ်တာနဲ့ state ထဲက data ကို ပြောင်းချင်တဲ့ အတွက်ကြောင့်ပဲ ဖြစ်ပါတယ်။ App Component မှာ `addTodoHandler` function မှာ parameter အနေနဲ့ value ကို လက်ခံထားခဲ့ပြီးတော့ `addHandler` props အနေနဲ့ AddForm component ကို ပေးပို့လိုက်တာပဲ ဖြစ်ပါတယ်။ AddForm component ကနေမှတဆင့် `AddTodoHandler` function မှာ လက်ခံထားခဲ့ value ဆိုတဲ့ parameter နေရာကို `inputRef.current.value` ဖြစ်တဲ့ input ထဲမှာထည့်လိုက်တဲ့ စာတွေကို parameter အနေနဲ့ Parent Component ကို ပြန်ပို့ပေးလိုက်တာဖြစ်ပါတယ်။ ဒီနေရာမှာ တစ်ခုသတိထားစေချင်တာက App Component ကို props အနေနဲ့ ပြန်ပို့လိုက်တာ မဟုတ်ပါဘူး။ Function ရဲ့ parameter တစ်ခုအနေနဲ့သာ ပေးပို့လိုက်တာဖြစ်ပါတယ်။
+ဒီအဆင့်မှာဆိုရင်တော့ AddForm component မှာ ပြောင်းလဲသွားတာတွေကတော့ form လို့ပြောင်းလိုက်ပါတယ်။ ဘာကြောင့်လဲဆိုတော့ submit လုပ်တာနဲ့ state ထဲက data ကို ပြောင်းချင်တဲ့ အတွက်ကြောင့်ပဲ ဖြစ်ပါတယ်။ App Component မှာ `addTodoHandler` function မှာ parameter အနေနဲ့ value ကို လက်ခံထားခဲ့ပြီးတော့ `addHandler` props အနေနဲ့ AddForm component ကို ပေးပို့လိုက်တာပဲ ဖြစ်ပါတယ်။ AddForm component ကနေမှတဆင့် `AddTodoHandler` function မှာ လက်ခံထားခဲ့ value ဆိုတဲ့ parameter နေရာကို `inputRef.current.value` ဖြစ်တဲ့ input ထဲမှာထည့်လိုက်တဲ့ စာတွေကို parameter အနေနဲ့ Parent Component ကို ပြန်ပို့ပေးလိုက်တာဖြစ်ပါတယ်။ ဒီနေရာမှာ တစ်ခုသတိထားစေချင်တာက App Component ကို props အနေနဲ့ ပြန်ပို့လိုက်တာ မဟုတ်ပါဘူး။ Function ရဲ့ parameter တစ်ခုအနေနဲ့သာ ပေးပို့လိုက်တာဖြစ်ပါတယ်။ ဒီလောက်ဆိုရင်တော့ props အကြောင်းကို နားလည်လိမ့်မယ်လို့မျှော်လင့်ပါတယ်။
+
+## Splitting Component
+
+### Project file structure
+    .
+    ├── assets
+    ├── public
+    ├── src
+    │    ├── AddForm.js
+    │    ├── App.css
+    │    ├── App.test.js
+    │    ├──BaseLayout.js
+    │    ├── Components.js
+    │    ├── Header.js
+    │    ├── index.css
+    │    ├── index.js
+    │    ├── ListItem.js
+    │    ├── logo.svg
+    │    ├── reportWebVitals.js
+    │    └── setupTests.js
+    ├── .gitignore
+    ├── package.json
+    ├── tailwind.confgi.js
+    ├── README.md
+    └── yarn.lock
